@@ -1,4 +1,5 @@
 ﻿using System;
+using VideoStore.Core.Protocols;
 
 namespace VideoStore.Core.Domain
 {
@@ -6,10 +7,11 @@ namespace VideoStore.Core.Domain
     {
         protected RentalDate() { }
 
+        public RentalDate(DateTime date) : base(date) { }
+
         public RentalDate(string date)
         {
-            if (!Validate(date)) throw new DomainException("Invalid rental date.");
-            Date = DateTime.Parse(date);
+            if (!Validate(date)) throw new DomainException($"Rental date '{date}' is not valid.");
         }
 
         public override bool Validate(string date)

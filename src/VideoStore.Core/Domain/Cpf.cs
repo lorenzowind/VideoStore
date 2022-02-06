@@ -1,4 +1,5 @@
 ﻿using VideoStore.Core.Utils;
+using VideoStore.Core.Protocols;
 
 namespace VideoStore.Core.Domain
 {
@@ -11,7 +12,7 @@ namespace VideoStore.Core.Domain
 
         public Cpf(string number)
         {
-            if (!Validate(number)) throw new DomainException("Invalid Cpf.");
+            if (!Validate(number)) throw new DomainException($"Cpf '{number}' is not valid.");
             Number = number;
         }
 

@@ -4,13 +4,20 @@ namespace VideoStore.Core.Domain
 {
     public abstract class BaseDate
     {
-        public DateTime Date { get; protected set; }
+        public DateTime Date { get; private set; }
+
+        protected BaseDate() { }
+
+        protected BaseDate(DateTime date)
+        {
+            Date = date;
+        }
 
         public virtual bool Validate(string date)
         {
             try 
             {
-                DateTime.Parse(date);
+                Date = DateTime.Parse(date);
             }
             catch
             {
@@ -19,5 +26,9 @@ namespace VideoStore.Core.Domain
 
             return true;
         }
+
+        public int CalculateDaysDif(DateTime endDate) => (endDate - Date).Days;
+
+        public bool IsFuture() => Date > DateTime.Now.Date;
     }
 }

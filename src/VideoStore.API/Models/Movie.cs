@@ -1,4 +1,6 @@
-﻿using VideoStore.Core.Domain;
+﻿using System.Threading.Tasks;
+using VideoStore.Core.Domain;
+using VideoStore.Core.Protocols;
 
 namespace VideoStore.API.Models
 {
@@ -16,5 +18,29 @@ namespace VideoStore.API.Models
             ParentalRating = parentalRating;
             Launch = launch;
         }
+
+        public Movie(int id, string title, int parentalRating, int launch)
+        {
+            Id = id;
+            Title = title;
+            ParentalRating = parentalRating;
+            Launch = launch;
+        }
+    }
+
+    public class MovieCsvRow
+    {
+        public int Id { get; private set; }
+        public string Titulo { get; private set; }
+        public int ClassificacaoIndicativa { get; private set; }
+        public int Lancamento { get; private set; }
+    }
+
+    public interface IMovieRepository
+    {
+        void AddRange(Movie[] movies);
+
+        Task<Movie> GetById(int id);
+        Task<PagedResult<Movie>> GetAll(int pageSize, int pageIndex, string query = null);
     }
 }

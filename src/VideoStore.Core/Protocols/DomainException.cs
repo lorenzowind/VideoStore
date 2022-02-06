@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace VideoStore.Core.Domain
+namespace VideoStore.Core.Protocols
 {
     public class DomainException : Exception
     {
