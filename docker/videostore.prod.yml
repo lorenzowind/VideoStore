@@ -1,0 +1,41 @@
+version: "3"
+
+services:
+  mysql:
+    image: mysql:latest
+    container_name: videostore-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "123456"
+      MYSQL_DATABASE: VideoStore
+    ports:
+      - "3306:3306"
+
+  api:
+    image: videostore-api:latest
+    container_name: videostore-api
+    build:
+      context: ../src
+      dockerfile: ./VideoStore.API/Dockerfile
+    ports:
+      - "5001:5001"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:5001
+    depends_on:
+      - mysql
+
+  web:
+    image: videostore-web:latest
+    container_name: videostore-web
+    build: 
+      context: ../src
+      dockerfile: ./VideoStore.Web/Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+      
+networks:
+  default:
+    driver: bridge
+    name: videostore-network
