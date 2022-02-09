@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using VideoStore.Core.Domain;
 using VideoStore.Core.Protocols;
 
@@ -28,6 +29,18 @@ namespace VideoStore.API.Models
         }
     }
 
+    public class MovieDto
+    {
+        public int Id { get; set; }
+        public string Title { get; set; }
+
+        public MovieDto(int id, string title)
+        {
+            Id = id;
+            Title = title;
+        }
+    }
+
     public class MovieCsvRow
     {
         public int Id { get; private set; }
@@ -42,5 +55,6 @@ namespace VideoStore.API.Models
 
         Task<Movie> GetById(int id);
         Task<PagedResult<Movie>> GetAll(int pageSize, int pageIndex, string query = null);
+        IEnumerable<MovieDto> GetMinData();
     }
 }

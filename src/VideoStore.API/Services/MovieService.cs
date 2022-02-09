@@ -16,6 +16,7 @@ namespace VideoStore.API.Services
     {
         Task<List<Movie>> AddMoviesRange(IFormFile csvFile);
         Task<PagedResult<Movie>> GetAllMovies(int ps = 8, int page = 1, string q = null);
+        IEnumerable<MovieDto> GetMoviesMinData();
     }
 
     public class MovieService : IMovieService
@@ -92,5 +93,8 @@ namespace VideoStore.API.Services
 
             return movies;
         }
+
+        public IEnumerable<MovieDto> GetMoviesMinData()
+            => _movieRepository.GetMinData();
     }
 }

@@ -5,9 +5,11 @@ VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A113A3B5-822B-431C-A071-6E31065DB138}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoStore.API", "src\VideoStore.API\VideoStore.API.csproj", "{D09A5DD5-503F-4A1B-8BC7-ADDB47C723C9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoStore.API", "src\VideoStore.API\VideoStore.API.csproj", "{D09A5DD5-503F-4A1B-8BC7-ADDB47C723C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoStore.Core", "src\VideoStore.Core\VideoStore.Core.csproj", "{858FDF7C-5626-44BF-9701-7A0897DCE72D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoStore.Core", "src\VideoStore.Core\VideoStore.Core.csproj", "{858FDF7C-5626-44BF-9701-7A0897DCE72D}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "VideoStore.Web", "src\videostore.web\VideoStore.Web.esproj", "{031570B2-36BC-4CCD-85E9-2CEAAF3AAE3A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +25,12 @@ Global
 		{858FDF7C-5626-44BF-9701-7A0897DCE72D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{858FDF7C-5626-44BF-9701-7A0897DCE72D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{858FDF7C-5626-44BF-9701-7A0897DCE72D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{031570B2-36BC-4CCD-85E9-2CEAAF3AAE3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{031570B2-36BC-4CCD-85E9-2CEAAF3AAE3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{031570B2-36BC-4CCD-85E9-2CEAAF3AAE3A}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{031570B2-36BC-4CCD-85E9-2CEAAF3AAE3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{031570B2-36BC-4CCD-85E9-2CEAAF3AAE3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{031570B2-36BC-4CCD-85E9-2CEAAF3AAE3A}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -30,6 +38,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{D09A5DD5-503F-4A1B-8BC7-ADDB47C723C9} = {A113A3B5-822B-431C-A071-6E31065DB138}
 		{858FDF7C-5626-44BF-9701-7A0897DCE72D} = {A113A3B5-822B-431C-A071-6E31065DB138}
+		{031570B2-36BC-4CCD-85E9-2CEAAF3AAE3A} = {A113A3B5-822B-431C-A071-6E31065DB138}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CF646F37-9ED8-4724-8B59-853A78D5BA4F}

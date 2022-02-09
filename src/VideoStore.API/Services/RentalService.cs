@@ -1,4 +1,5 @@
 ﻿using OfficeOpenXml;
+using System;
 using System.IO;
 using System.Threading.Tasks;
 using VideoStore.API.Models;
@@ -12,7 +13,7 @@ namespace VideoStore.API.Services
         Task<Rental> AddRental(RentalViewModel model);
         Task<Rental> UpdateRental(int id, RentalViewModel model);
         Task RemoveRental(int id);
-        Task<PagedResult<Rental>> GetAllRentals(int ps = 8, int page = 1, string q = null);
+        Task<PagedResult<RentalDto>> GetAllRentals(int ps = 8, int page = 1, DateTime? q = null);
         Task<MemoryStream> GenerateReport();
     }
 
@@ -110,7 +111,7 @@ namespace VideoStore.API.Services
             await _rentalRepository.UnitOfWork.Commit();
         }
 
-        public async Task<PagedResult<Rental>> GetAllRentals(int ps = 8, int page = 1, string q = null)
+        public async Task<PagedResult<RentalDto>> GetAllRentals(int ps = 8, int page = 1, DateTime? q = null)
             => await _rentalRepository.GetAll(ps, page, q);
 
         public async Task<MemoryStream> GenerateReport()

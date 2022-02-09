@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -35,7 +36,7 @@ namespace VideoStore.API.Data.Repositories
         public async Task<Rental> GetRentedByMovieId(int movieId)
             => await _context.Rentals.FirstOrDefaultAsync(r => r.MovieId == movieId && r.ReturnDate == null);
 
-        public async Task<PagedResult<Rental>> GetAll(int pageSize, int pageIndex, string query = null)
+        public async Task<PagedResult<RentalDto>> GetAll(int pageSize, int pageIndex, DateTime? query)
         {
             var sql = @$"SELECT 
                       R.Id AS Id, R.RentalDate AS RentalDate, R.ReturnDate AS ReturnDate,
@@ -54,7 +55,7 @@ namespace VideoStore.API.Data.Repositories
                 .QueryMultipleAsync(sql, new { RentalDate = query });
 
             var rentals = multi.Read<dynamic>()
-                .Select(r => new Rental(r.Id, r.CustomerId, r.MovieId, r.RentalDate, r.ReturnDate) 
+                .Select(r => new RentalDto(r.Id, r.CustomerId, r.MovieId, r.MovieLaunch, r.RentalDate, r.ReturnDate) 
                     { 
                         Customer = new Customer(r.CustomerId, r.CustomerName, r.CustomerCPF, r.CustomerBirthDate), 
                         Movie = new Movie(r.MovieId, r.MovieTitle, r.MovieParentalRating, r.MovieLaunch)
@@ -62,13 +63,13 @@ namespace VideoStore.API.Data.Repositories
 
             var total = multi.Read<int>().FirstOrDefault();
 
-            return new PagedResult<Rental>()
+            return new PagedResult<RentalDto>()
             {
                 List = rentals,
                 TotalResults = total,
                 PageIndex = pageIndex,
                 PageSize = pageSize,
-                Query = query
+                Query = query.ToString()
             };
         }
 

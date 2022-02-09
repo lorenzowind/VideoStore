@@ -68,7 +68,7 @@ namespace VideoStore.API.Controllers
         }
 
         [HttpGet("all")]
-        public async Task<PagedResult<Rental>> Index([FromQuery] int ps = 8, [FromQuery] int page = 1, [FromQuery] string q = null)
+        public async Task<PagedResult<RentalDto>> Index([FromQuery] int ps = 8, [FromQuery] int page = 1, [FromQuery] DateTime? q = null)
         {
             return await _rentalService.GetAllRentals(ps, page, q);
         }

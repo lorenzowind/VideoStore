@@ -41,6 +41,24 @@ namespace VideoStore.API.Models
         public void ChangeReturnDate(string returnDate) => ReturnDate = new ReturnDate(returnDate);
     }
 
+    public class RentalDto : Rental
+    {
+        public bool IsLate { get; set; }
+
+        public RentalDto(int id, int customerId, int movieId, int movieLaunch, DateTime rentalDate, DateTime? returnDate)
+            : base(id, customerId, movieId, rentalDate, returnDate)
+        {
+            if (returnDate == null)
+            {
+                var daysDiff = (DateTime.Now.Date - rentalDate.Date).Days;
+
+                IsLate = daysDiff > (Convert.ToBoolean(movieLaunch) 
+                    ? Constants.LAUNCH_MOVIE_DAYS_DEADLINE 
+                    : Constants.NON_LAUNCH_MOVIE_DAYS_DEADLINE);
+            }
+        }
+    }
+
     public class RentalViewModel
     {
         [Required(ErrorMessage = "Property {0} is required.")]
@@ -65,7 +83,7 @@ namespace VideoStore.API.Models
 
         Task<Rental> GetById(int id);
         Task<Rental> GetRentedByMovieId(int movieId);
-        Task<PagedResult<Rental>> GetAll(int pageSize, int pageIndex, string query = null);
+        Task<PagedResult<RentalDto>> GetAll(int pageSize, int pageIndex, DateTime? query);
 
         Task<List<Customer>> GetLateReturnCustomers();
         Task<Customer> GetMoreRentsCustomerByPosition(int position);

@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VideoStore.API.Models;
@@ -47,5 +48,8 @@ namespace VideoStore.API.Data.Repositories
                 Query = query
             };
         }
+
+        public IEnumerable<MovieDto> GetMinData()
+            => _context.Movies.Select(c => new MovieDto(c.Id, c.Title));
     }
 }

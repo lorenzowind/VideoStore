@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using VideoStore.API.Models;
 using VideoStore.Core.Domain;
 using VideoStore.Core.Protocols;
@@ -11,6 +12,7 @@ namespace VideoStore.API.Services
         Task<Customer> UpdateCustomer(int id, CustomerViewModel model);
         Task RemoveCustomer(int id);
         Task<PagedResult<Customer>> GetAllCustomers(int ps = 8, int page = 1, string q = null);
+        IEnumerable<CustomerDto> GetCustomersMinData();
     }
 
     public class CustomerService : ICustomerService
@@ -73,5 +75,8 @@ namespace VideoStore.API.Services
 
         public async Task<PagedResult<Customer>> GetAllCustomers(int ps = 8, int page = 1, string q = null)
             => await _customerRepository.GetAll(ps, page, q);
+
+        public IEnumerable<CustomerDto> GetCustomersMinData()
+            => _customerRepository.GetMinData();
     }
 }

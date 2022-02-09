@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using VideoStore.API.Models;
 using VideoStore.API.Services;
@@ -37,6 +38,12 @@ namespace VideoStore.API.Controllers
         public async Task<PagedResult<Movie>> Index([FromQuery] int ps = 8, [FromQuery] int page = 1, [FromQuery] string q = null)
         {
             return await _movieService.GetAllMovies(ps, page, q);
+        }
+
+        [HttpGet("min-data")]
+        public IEnumerable<MovieDto> Get()
+        {
+            return _movieService.GetMoviesMinData();
         }
     }
 }

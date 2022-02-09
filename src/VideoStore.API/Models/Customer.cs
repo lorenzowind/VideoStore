@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using VideoStore.Core.Domain;
@@ -34,6 +35,18 @@ namespace VideoStore.API.Models
         public void ChangeBirthDate(string birthDate) => BirthDate = new BirthDate(birthDate);
     }
 
+    public class CustomerDto
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+
+        public CustomerDto(int id, string name)
+        {
+            Id = id;
+            Name = name;
+        }
+    }
+
     public class CustomerViewModel
     {
         [Required(ErrorMessage = "Property {0} is required.")]
@@ -56,5 +69,6 @@ namespace VideoStore.API.Models
         Task<Customer> GetById(int id);
         Task<Customer> GetByCpf(string cpf);
         Task<PagedResult<Customer>> GetAll(int pageSize, int pageIndex, string query = null);
+        IEnumerable<CustomerDto> GetMinData();
     }
 }
